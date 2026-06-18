@@ -91,9 +91,6 @@ Playoff rounds were inferred by series structure rather than ESPN note fields. G
 * `outputs/figures/`
   Stores final chart images.
 
-* `outputs/tables/`
-  Stores exported summary tables.
-
 * `report/`
   Contains the final R Markdown report.
 
