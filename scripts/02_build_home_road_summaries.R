@@ -217,7 +217,7 @@ round_home_road <- playoff_games %>%
     road_win_pct = road_wins / games,
     close_games = sum(close_game, na.rm = TRUE),
     close_home_wins = sum(home_win & close_game, na.rm = TRUE),
-    close_home_win_pct = close_home_wins / close_games,
+    close_home_win_pct = if_else(close_games > 0, close_home_wins / close_games, NA_real_),
     avg_margin = mean(margin, na.rm = TRUE),
     .groups = "drop"
   )
@@ -225,17 +225,17 @@ round_home_road <- playoff_games %>%
 write_csv(round_home_road, "data/processed/playoff_home_road_by_round.csv")
 
 round_era_home_road <- playoff_games %>%
+  filter(round != "Unknown") %>%
   mutate(
     era = case_when(
       season < 2010 ~ "2002-2009",
-      season < 2017 ~ "2010-2016",
-      season < 2020 ~ "2017-2019",
+      season < 2019 ~ "2010-2018",
       season == 2020 ~ "2020 Bubble",
-      TRUE ~ "2021-2026"
+      season >= 2019 & season != 2020 ~ "2019-2026*"
     ),
     era = factor(
       era,
-      levels = c("2002-2009", "2010-2016", "2017-2019", "2020 Bubble", "2021-2026")
+      levels = c("2002-2009", "2010-2018", "2019-2026*", "2020 Bubble")
     )
   ) %>%
   group_by(era, round) %>%
@@ -246,7 +246,8 @@ round_era_home_road <- playoff_games %>%
     home_win_pct = home_wins / games,
     road_win_pct = road_wins / games,
     close_games = sum(close_game, na.rm = TRUE),
-    close_home_win_pct = sum(home_win & close_game, na.rm = TRUE) / close_games,
+    close_home_wins = sum(home_win & close_game, na.rm = TRUE),
+    close_home_win_pct = if_else(close_games > 0, close_home_wins / close_games, NA_real_),
     avg_margin = mean(margin, na.rm = TRUE),
     .groups = "drop"
   )
