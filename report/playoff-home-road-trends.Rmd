@@ -3,10 +3,10 @@ title: "Has NBA Playoff Home-Court Advantage Changed?"
 author: "Caleb Ramsey"
 date: "`r Sys.Date()`"
 output:
-pdf_document:
-toc: false
-number_sections: false
-latex_engine: xelatex
+  pdf_document:
+    toc: false
+    number_sections: false
+    latex_engine: xelatex
 fontsize: 11pt
 geometry: margin=0.7in
 ---
