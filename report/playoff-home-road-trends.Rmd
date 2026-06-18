@@ -9,6 +9,8 @@ output:
     latex_engine: xelatex
 fontsize: 11pt
 geometry: margin=0.7in
+header-includes:
+  - \usepackage{float}
 ---
 
 ```{r setup, include=FALSE}
@@ -144,7 +146,8 @@ round_era_home_road %>%
   kable_styling(
     full_width = TRUE,
     font_size = 10.5,
-    position = "center"
+    position = "center",
+    latex_options = "HOLD_position"
   )
 ```
 
@@ -163,5 +166,3 @@ Home court still matters. It gives teams an extra game, a familiar atmosphere, a
 But the cushion is smaller than it used to be.
 
 Modern road teams have more ways to hold up. Shooting creates quicker paths back into games. Spacing and creation keep bad stretches from turning into avalanches. Depth gives coaches more lineups that can survive uncomfortable minutes. The old home-court edge could turn one run into control of the night; now, more teams are built to play through it.
-
-That shift is notable. Home court still gives teams an edge, but it does not cover as much as it once did. The best teams can travel, keep their offense intact, and make the building matter less.
